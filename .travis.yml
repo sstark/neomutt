@@ -5,12 +5,12 @@ dist: xenial
 
 language: c
 compiler: gcc
-cache: ccache
 
 addons:
   apt:
     packages:
       - autopoint
+      - ca-certificates
       - docbook-simple
       - docbook-xsl
       - gettext
@@ -19,7 +19,6 @@ addons:
       - libgnutls-dev
       - libgpgme11-dev
       - libgss-dev
-      - libidn2-0-dev
       - libkyotocabinet-dev
       - liblmdb-dev
       - liblua5.2-dev
@@ -33,24 +32,22 @@ addons:
       - lua5.2
       - lynx
       - xsltproc
+  coverity_scan:
+    project:
+      name: "neomutt/neomutt"
+      description: "Teaching an Old Dog New Tricks"
+    notification_email: rich@flatcap.org
+    build_command_prepend: "./configure $OPTS"
+    build_command: "make"
+    branch_pattern: coverity
 
 git:
   depth: 3
 
-install:
-  - git clone --depth 1 https://github.com/neomutt/travis-build.git ~/config
-
-before_script:
-  - ccache --zero-stats
-  - export ANSI_CLEAR
-  - export -f travis_fold
-  - export -f travis_nanoseconds
-  - export -f travis_time_finish
-  - export -f travis_time_start
+env:
+  matrix:
+    - OPTS="--disable-doc --gpgme --lua --notmuch --bdb --with-domain=example.com --gdbm --gnutls --gss --homespool --kyotocabinet --lmdb --mixmaster --qdbm --sasl --tokyocabinet"
 
 script:
-  - ~/config/build
-
-after_script:
-  - ccache --show-stats
+  - if [ ${COVERITY_SCAN_BRANCH} != 1 ]; then make ; fi
 
