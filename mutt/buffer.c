@@ -350,7 +350,8 @@ void mutt_buffer_increase_size(struct Buffer *buf, size_t new_size)
   if (new_size <= buf->dsize)
     return;
 
-  size_t offset = buf->dptr - buf->data;
+  size_t offset = (buf->dptr && buf->data) ?  buf->dptr - buf->data : 0;
+
   buf->dsize = new_size;
   mutt_mem_realloc(&buf->data, buf->dsize);
   buf->dptr = buf->data + offset;
