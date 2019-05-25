@@ -342,6 +342,9 @@ void mutt_buffer_increase_size(struct Buffer *buf, size_t new_size)
   if (!buf)
     return;
 
+  if (!buf->dptr)
+    buf->dptr = buf->data;
+
   if (new_size <= buf->dsize)
     return;
 
