@@ -158,9 +158,6 @@ static int buffer_printf(struct Buffer *buf, const char *fmt, va_list ap)
   if (!buf->data || !buf->dptr || (buf->dsize < 128))
     mutt_buffer_increase_size(buf, 128);
 
-  if (!buf->dptr)
-    buf->dptr = buf->data;
-
   int doff = buf->dptr - buf->data;
   int blen = buf->dsize - doff;
 
