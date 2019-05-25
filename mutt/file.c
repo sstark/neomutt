@@ -109,7 +109,7 @@ static int mkwrapdir(const char *path, struct Buffer *newfile, struct Buffer *ne
   }
 
   mutt_buffer_printf(newdir, "%s/%s", mutt_b2s(parent), ".muttXXXXXX");
-  if (!mkdtemp(mutt_b2s(newdir)))
+  if (!mkdtemp(newdir->data))
   {
     mutt_debug(LL_DEBUG1, "mkdtemp() failed\n");
     rc = -1;

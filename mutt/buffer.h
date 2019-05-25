@@ -32,10 +32,10 @@
  */
 struct Buffer
 {
-  char *data;   /**< pointer to data */
-  char *dptr;   /**< current read/write position */
-  size_t dsize; /**< length of data */
-  int destroy;  /**< destroy 'data' when done? */
+  char *data;   ///< Pointer to data
+  char *dptr;   ///< Current read/write position
+  size_t dsize; ///< Length of data
+  int destroy;  ///< Destroy 'data' when done?
 };
 
 /* Convert a buffer to a const char * "string" */

@@ -228,7 +228,7 @@ void mutt_buffer_expand_path_regex(struct Buffer *buf, bool regex)
 
           /* TODO: fix mutt_default_save() to use Buffer */
           mutt_buffer_increase_size(p, PATH_MAX);
-          mutt_default_save(mutt_b2s(p), p->dsize, e);
+          mutt_default_save(p->data, p->dsize, e);
           mutt_buffer_fix_dptr(p);
 
           mutt_email_free(&e);

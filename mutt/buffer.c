@@ -98,7 +98,7 @@ struct Buffer *mutt_buffer_from(const char *seed)
   struct Buffer *b = mutt_buffer_new();
   b->data = mutt_str_strdup(seed);
   b->dsize = mutt_str_strlen(seed);
-  b->dptr = (char *) b->data + b->dsize;
+  b->dptr = b->data + b->dsize;
   return b;
 }
 
@@ -119,10 +119,9 @@ size_t mutt_buffer_addstr_n(struct Buffer *buf, const char *s, size_t len)
   if (!buf || !s)
     return 0;
 
-  if ((buf->dptr + len + 1) > (buf->data + buf->dsize))
-    mutt_buffer_increase_size(buf, buf->dsize + ((len < 128) ? 128 : len + 1));
-  if (!buf->dptr)
-    return 0; /* LCOV_EXCL_LINE */
+  if (!buf->data || !buf->dptr || ((buf->dptr + len + 1) > (buf->data + buf->dsize)))
+    mutt_buffer_increase_size(buf, buf->dsize + MAX(128, len + 1));
+
   memcpy(buf->dptr, s, len);
   buf->dptr += len;
   *(buf->dptr) = '\0';
@@ -156,20 +155,18 @@ static int buffer_printf(struct Buffer *buf, const char *fmt, va_list ap)
   if (!buf || !fmt)
     return 0; /* LCOV_EXCL_LINE */
 
-  va_list ap_retry;
-  va_copy(ap_retry, ap);
+  if (!buf->data || !buf->dptr || (buf->dsize < 128))
+    mutt_buffer_increase_size(buf, 128);
 
   if (!buf->dptr)
     buf->dptr = buf->data;
 
   int doff = buf->dptr - buf->data;
   int blen = buf->dsize - doff;
-  /* solaris 9 vsnprintf barfs when blen is 0 */
-  if (blen == 0)
-  {
-    blen = 128;
-    mutt_buffer_increase_size(buf, buf->dsize + blen);
-  }
+
+  va_list ap_retry;
+  va_copy(ap_retry, ap);
+
   int len = vsnprintf(buf->dptr, blen, fmt, ap);
   if (len >= blen)
   {
@@ -223,7 +220,7 @@ void mutt_buffer_fix_dptr(struct Buffer *buf)
 
   buf->dptr = buf->data;
 
-  if (buf->data)
+  if (buf->data && (buf->dsize > 0))
   {
     buf->data[buf->dsize - 1] = '\0';
     buf->dptr = strchr(buf->data, '\0');
@@ -351,7 +348,8 @@ void mutt_buffer_increase_size(struct Buffer *buf, size_t new_size)
   if (new_size <= buf->dsize)
     return;
 
-  size_t offset = buf->dptr - buf->data;
+  size_t offset = (buf->dptr && buf->data) ?  buf->dptr - buf->data : 0;
+
   buf->dsize = new_size;
   mutt_mem_realloc(&buf->data, buf->dsize);
   buf->dptr = buf->data + offset;
@@ -366,7 +364,7 @@ void mutt_buffer_increase_size(struct Buffer *buf, size_t new_size)
  */
 size_t mutt_buffer_len(const struct Buffer *buf)
 {
-  if (!buf || !buf->data)
+  if (!buf || !buf->data || !buf->dptr)
     return 0;
 
   return buf->dptr - buf->data;
