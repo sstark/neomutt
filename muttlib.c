@@ -228,7 +228,7 @@ void mutt_buffer_expand_path_regex(struct Buffer *buf, bool regex)
 
           /* TODO: fix mutt_default_save() to use Buffer */
           mutt_buffer_increase_size(p, PATH_MAX);
-          mutt_default_save(p->data, p->dsize, e);
+          mutt_default_save(mutt_b2s(p), p->dsize, e);
           mutt_buffer_fix_dptr(p);
 
           mutt_email_free(&e);
@@ -682,15 +682,16 @@ void mutt_pretty_mailbox(char *buf, size_t buflen)
 
 /**
  * mutt_buffer_pretty_mailbox - Shorten a mailbox path using '~' or '='
- * @param s Buffer containing Mailbox name
+ * @param buf Buffer containing Mailbox name
  */
-void mutt_buffer_pretty_mailbox(struct Buffer *s)
+void mutt_buffer_pretty_mailbox(struct Buffer *buf)
 {
+  if (!buf || !buf->data)
   /* This reduces the size of the Buffer, so we can pass it through.
-   * We adjust the size just to make sure s->data is not NULL though */
-  mutt_buffer_increase_size(s, PATH_MAX);
-  mutt_pretty_mailbox(s->data, s->dsize);
-  mutt_buffer_fix_dptr(s);
+   * We adjust the size just to make sure buf->data is not NULL though */
+  mutt_buffer_increase_size(buf, PATH_MAX);
+  mutt_pretty_mailbox(buf->data, buf->dsize);
+  mutt_buffer_fix_dptr(buf);
 }
 
 /**

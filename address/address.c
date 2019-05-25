@@ -1297,17 +1297,16 @@ void mutt_addrlist_dedupe(struct AddressList *al)
   {
     if (a->mailbox)
     {
-      struct Address *a2 = TAILQ_NEXT(a, entries), *tmp;
-      if (a2)
+      struct Address *a2 = TAILQ_NEXT(a, entries);
+      struct Address *tmp = NULL;
+
+      TAILQ_FOREACH_FROM_SAFE(a2, al, entries, tmp)
       {
-        TAILQ_FOREACH_FROM_SAFE(a2, al, entries, tmp)
+        if (a2->mailbox && (mutt_str_strcasecmp(a->mailbox, a2->mailbox) == 0))
         {
-          if (a2->mailbox && (mutt_str_strcasecmp(a->mailbox, a2->mailbox) == 0))
-          {
-            mutt_debug(LL_DEBUG2, "Removing %s\n", a2->mailbox);
-            TAILQ_REMOVE(al, a2, entries);
-            mutt_addr_free(&a2);
-          }
+          mutt_debug(LL_DEBUG2, "Removing %s\n", a2->mailbox);
+          TAILQ_REMOVE(al, a2, entries);
+          mutt_addr_free(&a2);
         }
       }
     }
