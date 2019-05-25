@@ -94,9 +94,12 @@ void test_mutt_buffer_add_printf(void)
         "apple banana cherry damson elderberry fig guava hawthorn ilama "
         "jackfruit kumquat lemon mango nectarine olive papaya quince raspberry "
         "strawberry tangerine ugli vanilla wolfberry xigua yew ziziphus";
-    const char *result = "testapple";
+    const char *result =
+        "testapple banana cherry damson elderberry fig guava hawthorn ilama "
+        "jackfruit kumquat lemon mango nectarine olive papaya quince raspberry "
+        "strawberry tangerine ugli vanilla wolfberry xigua yew ziziphus";
     struct Buffer *buf = mutt_buffer_from("test");
-    TEST_CHECK(mutt_buffer_add_printf(buf, str) == 5);
+    TEST_CHECK(mutt_buffer_add_printf(buf, str) == 195);
     TEST_CHECK(strcmp(mutt_b2s(buf), result) == 0);
     mutt_buffer_free(&buf);
   }
