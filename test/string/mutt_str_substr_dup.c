@@ -34,4 +34,9 @@ void test_mutt_str_substr_dup(void)
   {
     TEST_CHECK(mutt_str_substr_dup(NULL, str + 7) == NULL);
   }
+  // null
+  // empty range
+  // normal
+  // reverse range
+
 }

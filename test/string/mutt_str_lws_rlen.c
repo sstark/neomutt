@@ -32,4 +32,9 @@ void test_mutt_str_lws_rlen(void)
   {
     TEST_CHECK(mutt_str_lws_rlen(NULL, 10) == 0);
   }
+  // null
+  // no trailing space
+  // trailing space tab CR LF
+  // mix of trailing space
+
 }

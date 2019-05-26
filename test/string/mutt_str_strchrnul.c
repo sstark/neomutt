@@ -32,4 +32,8 @@ void test_mutt_str_strchrnul(void)
   {
     TEST_CHECK(mutt_str_strchrnul(NULL, 'a') == NULL);
   }
+  // null
+  // no match
+  // match at begin,middle,end
+
 }

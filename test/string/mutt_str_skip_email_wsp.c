@@ -32,4 +32,9 @@ void test_mutt_str_skip_email_wsp(void)
   {
     TEST_CHECK(mutt_str_skip_email_wsp(NULL) == NULL);
   }
+  // null
+  // no space
+  // some space
+  // only space
+
 }

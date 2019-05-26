@@ -40,4 +40,16 @@ void test_mutt_str_remall_strcasestr(void)
   {
     TEST_CHECK(mutt_str_remall_strcasestr(NULL, NULL) == 1);
   }
+  // mix up case of examples
+  // null,null
+  // replace apple
+  // normal no matches
+  // empty no matches
+  // match at start
+  // match in middle
+  // match at end
+  // multi-match at start/middle/end
+  // exact string match
+  // appleappleappleapple
+
 }

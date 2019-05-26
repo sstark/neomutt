@@ -32,4 +32,9 @@ void test_mutt_str_lws_len(void)
   {
     TEST_CHECK(mutt_str_lws_len(NULL, 10) == 0);
   }
+  // null
+  // no leading space
+  // leading space tab CR LF
+  // mix of leading space
+
 }

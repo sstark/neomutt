@@ -36,4 +36,10 @@ void test_mutt_str_startswith(void)
   {
     TEST_CHECK(mutt_str_startswith("apple", NULL, CASE_MATCH) == 0);
   }
+  // null
+  // empty str
+  // empty prefix
+  // no match
+  // match
+
 }

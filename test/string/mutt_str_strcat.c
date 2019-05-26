@@ -37,4 +37,7 @@ void test_mutt_str_strcat(void)
     char buf[32] = { 0 };
     TEST_CHECK(mutt_str_strcat(buf, sizeof(buf), NULL) == buf);
   }
+  // buf: null empty string
+  // str: null empty string
+
 }

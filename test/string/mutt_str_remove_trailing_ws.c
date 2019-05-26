@@ -33,4 +33,9 @@ void test_mutt_str_remove_trailing_ws(void)
     mutt_str_remove_trailing_ws(NULL);
     TEST_CHECK_(1, "mutt_str_remove_trailing_ws(NULL)");
   }
+  // null
+  // none
+  // trailing
+  // only whitespace
+
 }

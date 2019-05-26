@@ -73,4 +73,7 @@ void test_mutt_str_sysexit(void)
       return;
     }
   }
+  // exists
+  // !exists
+
 }

@@ -41,4 +41,9 @@ void test_mutt_str_stristr(void)
   {
     TEST_CHECK(mutt_str_stristr(NULL, NULL) == NULL);
   }
+  // null
+  // no match
+  // one match: start,middle,end
+  // mix up case
+
 }

@@ -32,4 +32,9 @@ void test_mutt_str_skip_whitespace(void)
   {
     TEST_CHECK(mutt_str_skip_whitespace(NULL) == NULL);
   }
+  // null
+  // no space
+  // some space
+  // only space
+
 }

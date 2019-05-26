@@ -41,4 +41,8 @@ void test_mutt_str_strncat(void)
   {
     TEST_CHECK(mutt_str_strncat(NULL, 10, NULL, 5) == NULL);
   }
+  // null
+  // dest: null,empty,normal
+  // src: null,empty,normal
+
 }

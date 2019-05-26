@@ -32,4 +32,10 @@ void test_mutt_str_next_word(void)
   {
     TEST_CHECK(mutt_str_next_word(NULL) == NULL);
   }
+  // null
+  // no space
+  // word space word$
+  // word space$
+  // space word$
+
 }

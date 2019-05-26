@@ -36,4 +36,9 @@ void test_mutt_str_rstrnstr(void)
   {
     TEST_CHECK(mutt_str_rstrnstr("apple", 10, NULL) == NULL);
   }
+  // null
+  // no match
+  // one match: start,middle,end
+  // multi-matches
+
 }

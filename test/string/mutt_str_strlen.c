@@ -32,4 +32,8 @@ void test_mutt_str_strlen(void)
   {
     TEST_CHECK(mutt_str_strlen(NULL) == 0);
   }
+  // null
+  // empty
+  // normal
+
 }

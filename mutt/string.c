@@ -875,7 +875,7 @@ size_t mutt_str_lws_rlen(const char *s, size_t n)
 
 /**
  * mutt_str_dequote_comment - Un-escape characters in an email address comment
- * @param s String to the un-escaped
+ * @param s String to be un-escaped
  *
  * @note The string is changed in-place
  */
@@ -1017,9 +1017,9 @@ bool mutt_str_is_ascii(const char *str, size_t len)
 }
 
 /**
- * mutt_str_find_word - Find the next word (non-space)
+ * mutt_str_find_word - Find the end of a word (non-space)
  * @param src String to search
- * @retval ptr Beginning of the next word
+ * @retval ptr End of the word
  *
  * Skip to the end of the current word.
  * Skip past any whitespace characters.
@@ -1029,13 +1029,14 @@ bool mutt_str_is_ascii(const char *str, size_t len)
  */
 const char *mutt_str_find_word(const char *src)
 {
-  const char *p = src;
+  if (!src)
+    return NULL;
 
-  while (p && *p && strchr(" \t\n", *p))
-    p++;
-  while (p && *p && !strchr(" \t\n", *p))
-    p++;
-  return p;
+  while (*src && strchr(" \t\n", *src))
+    src++;
+  while (*src && !strchr(" \t\n", *src))
+    src++;
+  return src;
 }
 
 /**
@@ -1110,6 +1111,9 @@ bool mutt_str_inline_replace(char *buf, size_t buflen, size_t xlen, const char *
 
   size_t slen = mutt_str_strlen(buf + xlen);
   size_t rlen = mutt_str_strlen(rstr);
+
+  if ((slen + rlen) >= buflen)
+    return false;
 
   memmove(buf + rlen, buf + xlen, slen + 1);
   memmove(buf, rstr, rlen);

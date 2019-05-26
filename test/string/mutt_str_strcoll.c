@@ -40,4 +40,6 @@ void test_mutt_str_strcoll(void)
   {
     TEST_CHECK(mutt_str_strcoll(NULL, NULL) == 0);
   }
+  // XXX???
+
 }

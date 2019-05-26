@@ -44,4 +44,11 @@ void test_mutt_str_substr_cpy(void)
     char buf[32] = { 0 };
     TEST_CHECK(mutt_str_substr_cpy(buf, str + 3, NULL, sizeof(buf)) == buf);
   }
+  // rename to copy
+  // reorder params
+  // null
+  // empty
+  // normal
+  // limit: 0, short, len, overlen
+
 }

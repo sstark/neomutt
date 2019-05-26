@@ -40,4 +40,10 @@ void test_mutt_str_word_casecmp(void)
   {
     TEST_CHECK(mutt_str_word_casecmp(NULL, NULL) == 0);
   }
+  // null
+  // empty
+  // word match followed by
+  // 	whitespace
+  // 	NUL
+  // 	text
 }

@@ -37,4 +37,8 @@ void test_mutt_str_strdup(void)
     char *ptr = NULL;
     TEST_CHECK(mutt_str_strdup(ptr) == NULL);
   }
+  // null
+  // empty
+  // normal
+
 }

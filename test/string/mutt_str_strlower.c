@@ -32,4 +32,9 @@ void test_mutt_str_strlower(void)
   {
     TEST_CHECK(mutt_str_strlower(NULL) == NULL);
   }
+  // null
+  // empty
+  // lower
+  // upper: start,middle,end,all
+
 }

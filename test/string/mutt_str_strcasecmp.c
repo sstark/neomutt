@@ -40,4 +40,10 @@ void test_mutt_str_strcasecmp(void)
   {
     TEST_CHECK(mutt_str_strcasecmp(NULL, NULL) == 0);
   }
+  // null
+  // empty
+  // case match
+  // !case match
+  // diff
+
 }

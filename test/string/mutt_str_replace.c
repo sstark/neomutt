@@ -44,4 +44,8 @@ void test_mutt_str_replace(void)
     mutt_str_replace(&ptr, NULL);
     TEST_CHECK_(1, "mutt_str_replace(&ptr, NULL)");
   }
+  // null,null
+  // orig: null, empty, normal
+  // replace: null, empty, normal
+
 }

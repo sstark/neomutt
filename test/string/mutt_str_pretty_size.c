@@ -33,4 +33,10 @@ void test_mutt_str_pretty_size(void)
     mutt_str_pretty_size(NULL, 10, 1234);
     TEST_CHECK_(1, "mutt_str_pretty_size(NULL, 10, 1234)");
   }
+  // null
+  // 0
+  // 997-999 b
+  // 1000-1002
+  // > 10M
+
 }
